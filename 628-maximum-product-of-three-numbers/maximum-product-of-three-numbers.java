@@ -7,7 +7,6 @@ class Solution {
             p = p*nums[l-i];
         }
         int p1 = nums[0]*nums[1]*nums[nums.length-1];
-        if(p1>p) return p1;
-        else return p;
+        return p1>p?p1:p;
     }
 }
