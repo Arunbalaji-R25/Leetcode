@@ -6,10 +6,10 @@ class Solution {
             long a = (l*l)+(r*r);
             if(a==c){
                 return true;
-            }else if(a>c){
-                r--;
-            }else{
+            }else if(a<c){
                 l++;
+            }else{
+                r--;
             }
         }
         return false;
