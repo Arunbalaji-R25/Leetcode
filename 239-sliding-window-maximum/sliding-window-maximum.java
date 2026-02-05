@@ -7,7 +7,7 @@ class Solution {
         int n = nums.length;
         int m = Integer.MAX_VALUE;
         int[] res = new int[n-k+1];
-        int ind = 0;
+        
         for(int i=0;i<n;i++){
             if(!dq.isEmpty() && dq.peekFirst() <= i-k){
                 dq.pollFirst();
@@ -15,7 +15,8 @@ class Solution {
             while(!dq.isEmpty() && nums[dq.peekLast()] < nums[i]){
                 dq.pollLast();
             }
-            dq.addLast(i); 
+            dq.addLast(i);
+            int ind = -1; 
             if(i>=k-1){
                 ind = dq.peekFirst();
                 res[i-k+1] = nums[ind];
