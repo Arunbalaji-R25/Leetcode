@@ -1,8 +1,9 @@
 class Solution {
     public int smallestNumber(int n) {
-        while((n&(n+1)) != 0) {
-            n++;
+        int x=n;
+        while((x&(x+1))!=0){
+            x++;
         }
-        return n;
+        return x;
     }
 }
