@@ -1,15 +1,14 @@
 class Solution {
     public int numOfWays(int n) {
-        final int MOD = 1_000_000_007;
-        long A = 6, B = 6;
-        
+        long mod = 1000000007;
+        long aba = 6;
+        long abc = 6;
         for (int i = 2; i <= n; i++) {
-            long newA = (2 * A + 2 * B) % MOD;
-            long newB = (2 * A + 3 * B) % MOD;
-            A = newA;
-            B = newB;
+            long newAba = (aba * 3 + abc * 2) % mod;
+            long newAbc = (aba * 2 + abc * 2) % mod;
+            aba = newAba;
+            abc = newAbc;
         }
-        
-        return (int) ((A + B) % MOD);
+        return (int)((aba + abc) % mod);
     }
 }
