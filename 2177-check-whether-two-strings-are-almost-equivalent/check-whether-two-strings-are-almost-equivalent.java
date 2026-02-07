@@ -1,21 +1,18 @@
 class Solution {
     public boolean checkAlmostEquivalent(String word1, String word2) {
-        
-        int[] freq = new int[26];
-
-        for (char c : word1.toCharArray()) {
-            freq[c - 'a']++;
+        int len1 = word1.length();
+        int len2 = word2.length();
+        int freq[] = new int[26];
+        for(int i=0; i<len1; i++){
+            freq[word1.charAt(i)-'a']++;
+            freq[word2.charAt(i)-'a']--;
         }
-
-        for (char c : word2.toCharArray()) {
-            freq[c - 'a']--;
-        }
-
-        for (int diff : freq) {
-            if (Math.abs(diff) > 3)
+        for(int i=0; i<26; i++){
+            if(Math.abs(freq[i])>3){
                 return false;
+            }
         }
-
         return true;
+        
     }
 }
