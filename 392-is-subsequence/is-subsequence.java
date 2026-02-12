@@ -9,8 +9,7 @@ class Solution {
         int j = 0;
 
         while(i<n && j<m) {
-            int ch = s.charAt(i);
-            while(j<m && t.charAt(j)!=ch) {
+            while(j<m && t.charAt(j)!=s.charAt(i)) {
                 j++;
             }
 
