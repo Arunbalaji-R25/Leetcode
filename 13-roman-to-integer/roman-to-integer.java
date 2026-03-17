@@ -21,7 +21,6 @@ class Solution {
         if(c=='C') return 100;
         if(c=='D') return 500;
         return 1000;
-
     }
   
 }
