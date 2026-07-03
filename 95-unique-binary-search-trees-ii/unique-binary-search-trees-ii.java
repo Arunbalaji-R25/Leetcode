@@ -15,10 +15,9 @@
  */
 class Solution {
     public List<TreeNode> generateTrees(int n) {
-        if(n>0){
-            return Trees(1,n);
-        }
-        return new ArrayList<>();
+        
+        return Trees(1,n);
+        
     }
 
     public List<TreeNode> Trees(int s, int e){
