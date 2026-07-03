@@ -14,21 +14,21 @@
  * }
  */
 class Solution {
-    public boolean utility(TreeNode root, TreeNode mn, TreeNode mx){
+    public boolean valid(TreeNode root, TreeNode l, TreeNode r){
         if(root == null){
             return true;
         }
-        if(mn != null && mn.val<=root.val){
+        if(l != null && l.val<=root.val){
             return false;
         }
-        if(mx != null && mx.val>=root.val){
+        if(r != null && r.val>=root.val){
             return false;
         }
-        return utility(root.left,root,mx) && utility(root.right,mn,root);
+        return valid(root.left,root,r) && valid(root.right,l,root);
     }
     public boolean isValidBST(TreeNode root) {
-        TreeNode mn = null;
-        TreeNode mx = null;
-        return utility(root,mn,mx);
+        TreeNode l = null;
+        TreeNode r = null;
+        return valid(root,l,r);
     }
 }
