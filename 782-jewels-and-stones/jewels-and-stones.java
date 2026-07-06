@@ -1,13 +1,10 @@
 class Solution {
     public int numJewelsInStones(String jewels, String stones) {
-        int count = 0;
-        for(char j:jewels.toCharArray()){
-            for(char s:stones.toCharArray()){
-                if(j==s){
-                    count++;
-                }
-            }
+        int n = stones.length() ;
+        int ans  = 0 ;
+        for(int i = 0; i<n ; i++){
+            if(jewels.indexOf (stones.charAt(i)) != -1) ans ++;
         }
-        return count;
+        return ans ;
     }
 }
