@@ -18,10 +18,7 @@ class Node {
 }
 */
 
-
-
 class Solution {
-
     HashMap<Node, Node> map = new HashMap<>();
     public Node cloneGraph(Node node) {
         if (node == null) {
@@ -35,7 +32,6 @@ class Solution {
         for (Node neighbor : node.neighbors) {
             clone.neighbors.add(cloneGraph(neighbor));
         }
-
         return clone;
     }
 }
