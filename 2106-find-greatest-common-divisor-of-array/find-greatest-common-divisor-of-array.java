@@ -6,10 +6,11 @@ class Solution {
             if(i>max) max = i;
             if(i<min) min = i;
         }
-        return gcd(min,max);
-    }
-    public int gcd(int a, int b){
-        if(b==0) return a;
-        return gcd(b, a%b);
+        while(min!=0){
+            int t = min;
+            min = max%min;
+            max = t;
+        }
+        return max;
     }
 }
