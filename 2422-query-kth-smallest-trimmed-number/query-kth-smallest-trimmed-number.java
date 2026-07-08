@@ -1,23 +1,36 @@
-class Solution{
-    public int[] smallestTrimmedNumbers(String[] nums, int[][] queries) {
-        int n = queries.length, j = 0;
-        int[] ans = new int[n];
-        Map<Integer, String[][]> trimmed = new HashMap<>();
-        for (int[] q : queries) {
-            int k = q[0] - 1;
-            int trim = q[1];
-            if (!trimmed.containsKey(trim)) {
-                String[][] arr = new String[nums.length][2];
-                int i = 0;
-                for (String num : nums) {
-                    int sz = num.length();
-                    arr[i] = new String[]{num.substring(sz - trim), "" + i++};
-                }
-                Arrays.sort(arr, Comparator.comparing(a -> a[0]));
-                trimmed.put(trim, arr);
+class Solution {
+    private int[] sort(List<int[]> sorted, String[] nums, int k) {
+        if (k > nums[0].length()) k = nums[0].length();
+        while (sorted.size() <= k) {
+            int[] t = new int [nums.length];
+            int l = sorted.size();
+            int charPos = nums[0].length() - l;
+            int[] count = new int[10];
+            for (String s: nums) {
+                count[s.charAt(charPos) - '0']++;
             }
-            ans[j++] = Integer.parseInt(trimmed.get(trim)[k][1]);
+            int[] pos =new int[10];
+            for (int i = 0; i < 9; i++) {
+                pos[i +  1] = count[i] + pos[i];
+            }
+            for (int i: sorted.get(l - 1)) {
+                t[pos[nums[i].charAt(charPos) - '0']++] = i;
+            }
+            sorted.add(t);
         }
-        return ans;        
+        return sorted.get(k);
+    }
+    public int[] smallestTrimmedNumbers(String[] nums, int[][] queries) {
+        List<int []> sorted = new ArrayList<>();
+        int[] res = new int[queries.length];
+        int[] t = new int [nums.length];
+        for (int i = 0; i < t.length; i++) {
+            t[i] = i;
+        }
+        sorted.add(t);
+        for (int i = 0; i <  queries.length; i++) {
+            res[i] = sort(sorted, nums, queries[i][1])[queries[i][0] - 1];
+        }
+        return res;
     }
 }
