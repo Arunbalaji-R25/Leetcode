@@ -1,42 +1,24 @@
-public class Solution {
-    Map<Integer, Boolean> map;
-    boolean[] used;
+class Solution {
     public boolean canIWin(int maxChoosableInteger, int desiredTotal) {
-        int sum = (1+maxChoosableInteger)*maxChoosableInteger/2;
-        if(sum < desiredTotal) return false;
-        if(desiredTotal <= 0) return true;
-        
-        map = new HashMap();
-        used = new boolean[maxChoosableInteger+1];
-        return helper(desiredTotal);
+        if (desiredTotal <= 0) return true;
+        if (maxChoosableInteger * (maxChoosableInteger + 1) / 2 < desiredTotal) return false;
+        int[] dp = new int[1 << maxChoosableInteger];
+        return dfs(dp, 0, maxChoosableInteger, desiredTotal);
     }
     
-    public boolean helper(int desiredTotal){
-        if(desiredTotal <= 0) return false;
-        int key = format(used);
-        if(!map.containsKey(key)){
-            for(int i=1; i<used.length; i++){
-                if(!used[i]){
-                    used[i] = true;
-                    if(!helper(desiredTotal-i)){
-                        map.put(key, true);
-                        used[i] = false;
-                        return true;
-                    }
-                    used[i] = false;
+    public boolean dfs(int[] dp, int chs, int max, int target) {
+        if (target <= 0) return false;
+        if (dp[chs] != 0) return dp[chs] == 1;
+        boolean win = false;
+        for (int i = 0; i < max; i++) {
+            if ((chs & (1 << i)) == 0) {
+                if(!dfs(dp, chs ^ (1 << i), max, target - i - 1)) {
+                    win = true;
+                    break;
                 }
             }
-            map.put(key, false);
         }
-        return map.get(key);
-    }
-
-    public int format(boolean[] used){
-        int num = 0;
-        for(boolean b: used){
-            num <<= 1;
-            if(b) num |= 1;
-        }
-        return num;
+        dp[chs] = win ? 1 : -1;
+        return win;
     }
 }
