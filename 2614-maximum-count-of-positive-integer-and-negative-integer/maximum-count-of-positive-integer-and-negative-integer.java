@@ -7,8 +7,6 @@ class Solution {
                 p++;
             }if(nums[i]<0){
                 n++;
-            }else{
-                continue;
             }
         }
         return Math.max(p,n);
